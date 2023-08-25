@@ -1,0 +1,90 @@
+$mobile_width: 375px;
+$desktop_width: 1440px;
+$font_family: "Nunito Sans", sans-serif;
+$font_size_homepage: 14px;
+$font_size_detail: 16px;
+
+$themes: (
+  dark: (
+    color_elements: hsl(209, 23%, 22%),
+    color_background: hsl(207, 26%, 17%),
+    color_text: hsl(0, 0%, 100%),
+    color_input: hsl(0, 0%, 100%),
+    color_shadow: hsl(208.7deg 26.17% 12.58% / 41%),
+  ),
+  light: (
+    color_elements: hsl(0, 0%, 100%),
+    color_background: hsl(0, 0%, 98%),
+    color_text: hsl(200, 15%, 8%),
+    color_input: hsl(0, 0%, 52%),
+    color_shadow: hsl(0deg 0% 0% / 6%),
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@mixin mobiles {
+  @media only screen and (min-width: 320px) {
+    @content;
+  }
+}
+@mixin mobilem {
+  @media only screen and (min-width: 375px) {
+    @content;
+  }
+}
+@mixin mobilel {
+  @media only screen and (min-width: 425px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+@mixin desktopl {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin small_laptop_custom {
+  @media only screen and (min-width: 768px) and (max-height: 700px) {
+    @content;
+  }
+}
+
+@mixin vertical_list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
