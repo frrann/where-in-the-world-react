@@ -16,7 +16,6 @@ select:focus {
 
 ///////////////////////////////////////////////////
 .container {
-  height: 100vh;
   @include mixin.themify(mixin.$themes) {
     background: mixin.themed("color_background");
     color: mixin.themed("color_text");
@@ -110,8 +109,29 @@ select:focus {
         }
         margin-bottom: 30px;
         display: grid;
+        gap: 5px;
         width: 75vw;
         border-radius: 5px;
+
+        &:hover {
+          transform: translateY(-0.5%);
+          @include mixin.themify(mixin.$themes) {
+            box-shadow: 0 2rem 8rem mixin.themed("color_hover_shadow");
+          }
+        }
+
+        & .country__flag {
+          display: block;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 5px 5px 0px 0px;
+        }
+
+        & .country__name {
+          padding: 25px 20px;
+          font-weight: 800;
+          font-size: 18px;
+        }
 
         & p,
         ul {
@@ -120,6 +140,15 @@ select:focus {
 
         & ul {
           list-style: none;
+          margin-bottom: 30px;
+
+          & li {
+            padding-bottom: 5px;
+
+            & .country__details__label {
+              font-weight: 600;
+            }
+          }
         }
       }
     }

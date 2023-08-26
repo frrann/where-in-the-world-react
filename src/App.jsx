@@ -3,10 +3,15 @@ import { useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { RiMoonFill } from "react-icons/ri";
 import { RiMoonLine } from "react-icons/ri";
+import data from "./data/data.json";
 import "./styles/globals.scss";
 
 function App() {
   const [theme, setTheme] = useState("dark");
+  const randomCountries = data
+    .slice()
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 10);
 
   return (
     <div className={`theme-${theme}`}>
@@ -47,24 +52,32 @@ function App() {
             </div>
           </div>
           <div className="countries">
-            <div className="country card">
-              <img className="country__flag" src="" alt="$Country flag" />
-              <p className="country__name">$Name</p>
-              <ul className="country__details">
-                <li className="country__population">$Population</li>
-                <li className="country__region">$Region</li>
-                <li className="country__capital">$Capital</li>
-              </ul>
-            </div>
-            <div className="country card">
-              <img className="country__flag" src="" alt="$Country flag" />
-              <p className="country__name">$Name</p>
-              <ul className="country__details">
-                <li className="country__population">$Population</li>
-                <li className="country__region">$Region</li>
-                <li className="country__capital">$Capital</li>
-              </ul>
-            </div>
+            {randomCountries.map((country) => (
+              <div className="country card" key={country.alpha3Code}>
+                <img
+                  className="country__flag"
+                  src={country.flags?.png}
+                  alt={`${country.name} flag`}
+                />
+                <h2 className="country__name">{country.name}</h2>
+                <ul className="country__details">
+                  <li className="country__population">
+                    <span className="country__details__label">
+                      Population:{" "}
+                    </span>
+                    {country.population.toLocaleString("en-US")}
+                  </li>
+                  <li className="country__region">
+                    <span className="country__details__label">Region: </span>
+                    {country.region}
+                  </li>
+                  <li className="country__capital">
+                    <span className="country__details__label">Capital: </span>
+                    {country.capital}
+                  </li>
+                </ul>
+              </div>
+            ))}
           </div>
         </main>
       </div>
