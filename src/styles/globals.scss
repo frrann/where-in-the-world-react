@@ -2,6 +2,24 @@
 @use "_mixin.scss" as mixin;
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,600;6..12,800&display=swap");
 
+/* override browser default */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* use viewport-relative units to cover page fully */
+body {
+  height: 100vh;
+  // width: 100vw;
+}
+
+/* include border and padding in element width and height */
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
 input,
@@ -14,6 +32,16 @@ select:focus {
   outline: none;
 }
 
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.w-h-100 {
+  height: 100%;
+  width: 100%;
+}
+
 ///////////////////////////////////////////////////
 .container {
   @include mixin.themify(mixin.$themes) {
@@ -22,12 +50,12 @@ select:focus {
   }
 }
 
-.countries {
-  @include mixin.vertical_list;
-}
-
 .btn {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 130px;
   padding: 10px 30px;
   border: none;
   border-radius: 3px;
@@ -35,11 +63,11 @@ select:focus {
     background-color: mixin.themed("color_elements");
     color: mixin.themed("color_text");
   }
-}
 
-.btn:hover {
-  @include mixin.themify(mixin.$themes) {
-    box-shadow: 0 0 15px 4px mixin.themed("color_shadow");
+  &:hover {
+    @include mixin.themify(mixin.$themes) {
+      box-shadow: 0 0 15px 4px mixin.themed("color_shadow");
+    }
   }
 }
 
@@ -58,9 +86,10 @@ select:focus {
     }
 
     & .theme-switch {
-      font-weight: 600;
       display: flex;
+      align-items: center;
       gap: 10px;
+      font-weight: 600;
       cursor: pointer;
     }
   }
@@ -120,6 +149,11 @@ select:focus {
     }
 
     & .countries {
+      @include mixin.vertical_list;
+      @include mixin.themify(mixin.$themes) {
+        background: mixin.themed("color_background");
+      }
+
       & a {
         text-decoration: none;
         color: inherit;
@@ -135,6 +169,7 @@ select:focus {
         gap: 5px;
         width: 75vw;
         border-radius: 5px;
+        cursor: pointer;
 
         &:hover {
           transform: translateY(-0.5%);
@@ -144,8 +179,9 @@ select:focus {
         }
 
         & .country__flag {
-          display: block;
+          height: 200px;
           width: 100%;
+          display: block;
           object-fit: cover;
           border-radius: 5px 5px 0px 0px;
         }
@@ -178,8 +214,175 @@ select:focus {
 
     & .country {
       display: grid;
-      gap: 20px;
+      gap: 60px;
+      padding: 4vh 6vw;
+
+      & svg {
+        height: 20px;
+        width: 20px;
+      }
+
+      &__flag {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      &__info {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        gap: 20px;
+
+        &--nd-section {
+          display: grid;
+          gap: 20px;
+
+          & h2 {
+            font-size: 26px;
+            font-weight: 800;
+            padding: 15px 0;
+          }
+
+          &__list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 35px;
+
+            & ul {
+              list-style: none;
+              padding: 0;
+
+              & li {
+                font-size: 14px;
+                font-weight: 800;
+                margin-bottom: 20px;
+
+                & span {
+                  font-weight: normal;
+                }
+              }
+            }
+          }
+
+          & .neighbours__list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            h3 {
+              font-size: 16px;
+              font-weight: 800;
+            }
+
+            &--section {
+              display: flex;
+              gap: 20px;
+              flex-wrap: wrap;
+
+              & .neighbour {
+                padding: 5px 20px;
+                font-size: 12px;
+                cursor: pointer;
+
+                @include mixin.themify(mixin.$themes) {
+                  background-color: mixin.themed("color_elements");
+                  color: mixin.themed("color_text");
+                }
+
+                &:hover {
+                  @include mixin.themify(mixin.$themes) {
+                    box-shadow: 0 0 15px 4px mixin.themed("color_shadow");
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mixin.tablet {
+  main {
+    & .countries {
+      @include mixin.horizontal_list;
+      padding: 1vh 4vw;
+
+      & .card {
+        width: 45%;
+
+        & .country__flag {
+          height: 180px;
+        }
+      }
+    }
+
+    & .country {
       padding: 4vh 4vw;
+      &__info {
+        flex-direction: row;
+        gap: 70px;
+      }
+    }
+  }
+}
+
+@include mixin.desktop {
+  header {
+    padding: 3vh 4vw;
+  }
+
+  main {
+    & .countries {
+      & .card {
+        width: 30%;
+      }
+    }
+
+    & .country {
+      &__info {
+        flex-direction: row;
+        gap: 80px;
+
+        &--st-section {
+          width: 40%;
+        }
+
+        &--nd-section {
+          padding-top: 25px;
+
+          &__list {
+            gap: 95px;
+            flex-direction: row;
+          }
+        }
+
+        & .neighbours__list {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+@include mixin.desktopl {
+  main {
+    & .countries {
+      & .card {
+        width: 22%;
+      }
+    }
+
+    & .country {
+      &__info {
+        &--st-section {
+          width: 45%;
+        }
+      }
     }
   }
 }
