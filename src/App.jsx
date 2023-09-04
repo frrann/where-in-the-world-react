@@ -1,30 +1,23 @@
-import { useState } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import data from "./data/data.json";
-import Header from "./components/Header";
-import FilterBar from "./components/FilterBar";
-import CountryList from "./components/CountryList";
-
+import Homepage from "./pages/Homepage";
+import Main from "./components/Main";
+import Country from "./pages/Country";
 import "./styles/globals.scss";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
-  const randomCountries = data
-    .slice()
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 10);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Homepage />,
+      children: [
+        { index: true, element: <Main /> },
+        { path: ":countryName", element: <Country /> },
+      ],
+    },
+  ]);
 
-  return (
-    <div className={`theme-${theme}`}>
-      <div className="container">
-        <Header theme={theme} setTheme={setTheme} />
-        <main className="main">
-          <FilterBar />
-          <CountryList countries={randomCountries} />
-        </main>
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

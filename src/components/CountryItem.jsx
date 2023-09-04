@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import Card from "./Card";
 
-const Country = ({ country }) => {
+const CountryItem = ({ country }) => {
   return (
-    <Card className="country">
+    <Card>
       <img
         className="country__flag"
         src={country.flags?.png}
@@ -28,4 +28,4 @@ const Country = ({ country }) => {
   );
 };
 
-export default Country;
+export default CountryItem;
