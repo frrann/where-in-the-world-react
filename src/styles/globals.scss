@@ -26,6 +26,23 @@ select:focus {
   @include mixin.vertical_list;
 }
 
+.btn {
+  cursor: pointer;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 3px;
+  @include mixin.themify(mixin.$themes) {
+    background-color: mixin.themed("color_elements");
+    color: mixin.themed("color_text");
+  }
+}
+
+.btn:hover {
+  @include mixin.themify(mixin.$themes) {
+    box-shadow: 0 0 15px 4px mixin.themed("color_shadow");
+  }
+}
+
 @include mixin.mobiles {
   header {
     display: flex;
@@ -103,6 +120,11 @@ select:focus {
     }
 
     & .countries {
+      & a {
+        text-decoration: none;
+        color: inherit;
+      }
+
       & .card {
         @include mixin.themify(mixin.$themes) {
           background-color: mixin.themed("color_elements");
@@ -152,6 +174,12 @@ select:focus {
           }
         }
       }
+    }
+
+    & .country {
+      display: grid;
+      gap: 20px;
+      padding: 4vh 4vw;
     }
   }
 }
