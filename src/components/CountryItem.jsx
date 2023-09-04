@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from "react-router";
 import Card from "./Card";
 
 const CountryItem = ({ country }) => {
+  const navigate = useNavigate();
+
   return (
-    <Card>
+    <Card onClick={() => navigate(`/${country.name}`)}>
       <img
         className="country__flag"
         src={country.flags?.png}
-        alt={`${country.name} flag`}
+        alt={`${country.name}'s flag`}
       />
       <h2 className="country__name">{country.name}</h2>
       <ul className="country__details">
