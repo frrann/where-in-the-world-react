@@ -12,14 +12,14 @@ const CountryList = ({ countries }) => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const firstPageIndex = (currentPage - 1) * MAX_NUM_OF_PAGES;
     const lastPageIndex = firstPageIndex + MAX_NUM_OF_PAGES;
-    return countries.slice(firstPageIndex, lastPageIndex);
+    return countries?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, countries]);
 
   return (
     <div className="search__results">
       <div className="countries">
-        {searchResults.map((country) => (
-          <CountryItem country={country} key={country.alpha3Code} />
+        {searchResults?.map((country) => (
+          <CountryItem country={country} key={country.cca3} />
         ))}
       </div>
       <Pagination

@@ -1,27 +1,28 @@
-import data from "../data/data.json";
+import { useState } from "react";
+import { useCountries } from "../hooks/useCountries";
+
 import FilterBar from "./FilterBar";
 import CountryList from "./CountryList";
-import { useState } from "react";
-
-const randomCountries = data
-  .slice()
-  .sort(() => Math.random() - 0.5)
-  .slice(0, 72);
+import Spinner from "./Spinner";
+import ErrorMessage from "./ErrorMessage";
 
 const Main = () => {
   const [query, setQuery] = useState("");
+  const [countries, , isLoading, error] = useCountries();
 
   const searchedCountries =
     query.length > 0
-      ? randomCountries.filter((country) =>
-          country.name.toLowerCase().includes(query.toLowerCase())
+      ? countries.filter((country) =>
+          country.name?.common.toLowerCase().includes(query.toLowerCase())
         )
-      : randomCountries;
+      : countries;
 
   return (
     <>
       <FilterBar query={query} setQuery={setQuery} />
-      <CountryList countries={searchedCountries} />
+      {!isLoading && <CountryList countries={searchedCountries} />}
+      {isLoading && <Spinner />}
+      {error && <ErrorMessage message={error} />}
     </>
   );
 };
