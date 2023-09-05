@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 
 const CountryDetails = ({ country }) => {
-  console.log(country);
   const navigate = useNavigate();
   return (
     <div className="country">
@@ -37,26 +36,30 @@ const CountryDetails = ({ country }) => {
               <li>
                 Sub Region: <span>{country.subregion}</span>
               </li>
-              <li>
-                Capital: <span>{country.capital}</span>
-              </li>
+              {country.capital && (
+                <li>
+                  Capital: <span>{country.capital}</span>
+                </li>
+              )}
             </ul>
             <ul>
               <li>
                 Top Level Domain: <span>{country.topLevelDomain[0]}</span>
               </li>
-              <li>
-                Currencies:
-                <span>
-                  {" "}
-                  {country.currencies.map(
-                    (curr, index) =>
-                      `${curr.name}${
-                        index !== country.currencies.length - 1 ? ", " : ""
-                      }`
-                  )}
-                </span>
-              </li>
+              {country.currencies && (
+                <li>
+                  Currencies:
+                  <span>
+                    {" "}
+                    {country.currencies.map(
+                      (curr, index) =>
+                        `${curr.name}${
+                          index !== country.currencies.length - 1 ? ", " : ""
+                        }`
+                    )}
+                  </span>
+                </li>
+              )}
               <li>
                 Languages:
                 <span>

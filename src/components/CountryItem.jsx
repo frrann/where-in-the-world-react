@@ -22,10 +22,12 @@ const CountryItem = ({ country }) => {
           <span className="country__details__label">Region: </span>
           {country.region}
         </li>
-        <li className="country__capital">
-          <span className="country__details__label">Capital: </span>
-          {country.capital}
-        </li>
+        {country.capital && (
+          <li className="country__capital">
+            <span className="country__details__label">Capital: </span>
+            {country.capital}
+          </li>
+        )}
       </ul>
     </Card>
   );
