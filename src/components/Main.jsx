@@ -1,7 +1,7 @@
 import data from "../data/data.json";
 import FilterBar from "./FilterBar";
 import CountryList from "./CountryList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const randomCountries = data
   .slice()
@@ -9,16 +9,19 @@ const randomCountries = data
   .slice(0, 72);
 
 const Main = () => {
-  const [countries, setCountries] = useState([]);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    setCountries(randomCountries);
-  }, []);
+  const searchedCountries =
+    query.length > 0
+      ? randomCountries.filter((country) =>
+          country.name.toLowerCase().includes(query.toLowerCase())
+        )
+      : randomCountries;
 
   return (
     <>
-      <FilterBar />
-      <CountryList countries={countries} />
+      <FilterBar query={query} setQuery={setQuery} />
+      <CountryList countries={searchedCountries} />
     </>
   );
 };

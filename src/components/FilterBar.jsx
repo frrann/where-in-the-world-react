@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import Search from "./Search";
 import Filter from "./Filter";
 
-const FilterBar = () => {
+const FilterBar = ({ query, setQuery }) => {
   return (
     <div className="filter__bar">
-      <Search />
+      <Search query={query} setQuery={setQuery} />
       <Filter />
     </div>
   );
