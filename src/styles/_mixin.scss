@@ -12,6 +12,7 @@ $themes: (
     color_input: hsl(0, 0%, 100%),
     color_shadow: hsl(208.7deg 26.17% 12.58% / 41%),
     color_hover_shadow: rgba(255, 255, 255, 0.2),
+    color_spinner: hsl(0, 0%, 100%),
   ),
   light: (
     color_elements: hsl(0, 0%, 100%),
@@ -20,6 +21,7 @@ $themes: (
     color_input: hsl(0, 0%, 52%),
     color_shadow: hsl(0deg 0% 0% / 6%),
     color_hover_shadow: rgba(0, 0, 0, 0.2),
+    color_spinner: hsl(0, 0%, 52%),
   ),
 );
 
@@ -95,5 +97,4 @@ $themes: (
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
 }

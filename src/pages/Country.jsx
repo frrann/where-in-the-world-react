@@ -1,12 +1,32 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useCountries } from "../hooks/useCountries";
+
 import CountryDetails from "../components/CountryDetails";
-import data from "../data/data.json";
+import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
+import { BsArrowLeft } from "react-icons/bs";
 
 const Country = () => {
   const { countryName } = useParams();
-  const country = data.filter((country) => country.name === countryName)[0];
+  const navigate = useNavigate();
+  const [, country, isLoading, error] = useCountries(countryName);
 
-  return <CountryDetails country={country} />;
+  return (
+    <div className="country">
+      <div>
+        <div onClick={() => navigate("/")} className="btn">
+          <BsArrowLeft /> Back
+        </div>
+      </div>
+      <>
+        {!isLoading && country && (
+          <CountryDetails country={country} isLoading={isLoading} />
+        )}
+        {isLoading && <Spinner />}
+        {error && <ErrorMessage message={error} />}
+      </>
+    </div>
+  );
 };
 
 export default Country;
