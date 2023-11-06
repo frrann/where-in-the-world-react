@@ -26,7 +26,7 @@ Users should be able to:
 - Search for a country using an `input` field
 - Filter countries by region
 - Click on a country to see more detailed information on a separate page
-- Click through to the border countries on the detail page ![WIP](https://img.shields.io/badge/WIP-orange)
+- Click through to the border countries on the detail page
 - Toggle the color scheme between light and dark mode _(optional)_
 
 ### Screenshot
@@ -36,7 +36,7 @@ Users should be able to:
 ### Links
 
 - [Solution URL](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-using-react-kdTEmzoR-m)
-- [Live Site URL](https://where-in-the-world-wip.netlify.app)
+- [Live Site URL](https://frrann-where-in-the-world.netlify.app/)
 
 ## My process
 
