@@ -7,7 +7,11 @@ import Footer from "../components/Footer";
 // import styles from "./Homepage.module.scss";
 
 const Homepage = () => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches === true
+      ? "dark"
+      : "light"
+  );
 
   return (
     <div className={`theme-${theme} w-h-100`}>
