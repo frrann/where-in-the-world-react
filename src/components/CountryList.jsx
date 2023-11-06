@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 
 const MAX_NUM_OF_PAGES = 24;
 
-const CountryList = ({ countries }) => {
+const CountryList = ({ countries, query }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const searchResults = useMemo(() => {
@@ -16,19 +16,27 @@ const CountryList = ({ countries }) => {
   }, [currentPage, countries]);
 
   return (
-    <div className="search__results">
-      <div className="countries">
-        {searchResults?.map((country) => (
-          <CountryItem country={country} key={country.cca3} />
-        ))}
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        totalCount={countries.length}
-        pageSize={MAX_NUM_OF_PAGES}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-    </div>
+    <>
+      {searchResults.length !== 0 ? (
+        <div className="search__results">
+          <div className="countries">
+            {searchResults?.map((country) => (
+              <CountryItem country={country} key={country.cca3} />
+            ))}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalCount={countries.length}
+            pageSize={MAX_NUM_OF_PAGES}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </div>
+      ) : (
+        <h1 style={{ padding: "1vh 5vw" }}>
+          No results found for the search: &quot;{query}&quot;.
+        </h1>
+      )}
+    </>
   );
 };
 
