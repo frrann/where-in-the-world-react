@@ -14,7 +14,7 @@ const Country = () => {
   return (
     <div className="country">
       <div>
-        <div onClick={() => navigate("/")} className="btn">
+        <div onClick={() => navigate("/")} className="btn btn-back">
           <BsArrowLeft /> Back
         </div>
       </div>
