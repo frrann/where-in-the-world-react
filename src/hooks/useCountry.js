@@ -16,12 +16,14 @@ export const useCountry = (countryName = undefined) => {
         // set current country
         setCountry(data[0]);
 
-        // return all border countries of current country
-        return Promise.all(
-          data[0]?.borders.map((border) =>
-            fetch(`${BASE_URL}/alpha/${border}`).then((resp) => resp.json())
-          )
-        );
+        if (data[0].borders)
+          // return all border countries of current country
+          return Promise.all(
+            data[0]?.borders.map((border) =>
+              fetch(`${BASE_URL}/alpha/${border}`).then((resp) => resp.json())
+            )
+          );
+        else return null;
       })
       .then((borders) => setBorderCountries(borders))
       .catch((error) => setError(error.message))
