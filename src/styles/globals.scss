@@ -123,6 +123,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  gap: 3px;
 
   @include mixin.themify(mixin.$themes) {
     background: mixin.themed("color_background");
@@ -130,6 +131,7 @@ footer {
 
   & a {
     color: hsl(228, 45%, 44%);
+    text-decoration: none;
   }
 }
 
