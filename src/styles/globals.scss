@@ -431,6 +431,7 @@ footer {
               & .neighbour {
                 padding: 5px 20px;
                 font-size: 12px;
+                text-decoration: none;
                 cursor: pointer;
 
                 @include mixin.themify(mixin.$themes) {

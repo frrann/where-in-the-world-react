@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 
-const CountryDetails = ({ country }) => {
+const CountryDetails = ({ country, borderCountries = [] }) => {
   return (
     <div className="country__info">
       <div className="country__info--st-section">
@@ -65,10 +66,14 @@ const CountryDetails = ({ country }) => {
           <div className="neighbours__list">
             <h3>Border Countries:</h3>
             <div className="neighbours__list--section">
-              {country.borders.map((border) => (
-                <span className="neighbour" key={border}>
-                  {border}
-                </span>
+              {borderCountries.map((border) => (
+                <Link
+                  to={`/${border[0]?.name?.common}`}
+                  className="neighbour"
+                  key={border[0]?.cca3}
+                >
+                  {border[0]?.name?.common}
+                </Link>
               ))}
             </div>
           </div>

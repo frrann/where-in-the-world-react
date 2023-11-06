@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useCountries } from "../hooks/useCountries";
+import { useCountry } from "../hooks/useCountry";
 
 import CountryDetails from "../components/CountryDetails";
 import Spinner from "../components/Spinner";
@@ -9,7 +9,7 @@ import { BsArrowLeft } from "react-icons/bs";
 const Country = () => {
   const { countryName } = useParams();
   const navigate = useNavigate();
-  const [, country, isLoading, error] = useCountries(countryName);
+  const [borderCountries, country, isLoading, error] = useCountry(countryName);
 
   return (
     <div className="country">
@@ -20,7 +20,11 @@ const Country = () => {
       </div>
       <>
         {!isLoading && country && (
-          <CountryDetails country={country} isLoading={isLoading} />
+          <CountryDetails
+            country={country}
+            isLoading={isLoading}
+            borderCountries={borderCountries}
+          />
         )}
         {isLoading && <Spinner />}
         {error && <ErrorMessage message={error} />}
