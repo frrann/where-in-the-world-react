@@ -9,7 +9,7 @@ import ErrorMessage from "./ErrorMessage";
 const Main = () => {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("none");
-  const [countries, , isLoading, error] = useCountries();
+  const [countries, isLoading, error] = useCountries();
 
   let filteredCountries = [];
 
